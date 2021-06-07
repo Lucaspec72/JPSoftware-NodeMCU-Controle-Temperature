@@ -1,13 +1,6 @@
 mqtt_client = mqtt.Client(MQTTCLIENTID, 30, MQTTUSERNAME, MQTTPASSWORD)
-function turnoffled()
-    gpio.mode(4,gpio.OUTPUT)
-    gpio.write(4,gpio.HIGH)   
-end
 mqtt_client:on("message", 
      function(client, topic, data)
-         tmr.create():alarm(1, tmr.ALARM_SINGLE, turnoffled)
-         gpio.mode(4,gpio.OUTPUT)
-         gpio.write(4,gpio.LOW)
          if(topic == tostring(topic_main.."-pincontrol")) then
             print("Message received on pin control topic")
             ProcessPin(topic, data)
@@ -16,9 +9,6 @@ mqtt_client:on("message",
 )
 mqtt_client:on("overflow", 
     function(client, topic, data)
-        tmr.create():alarm(1, tmr.ALARM_SINGLE, turnoffled)
-        gpio.mode(4,gpio.OUTPUT)
-        gpio.write(4,gpio.LOW)
         print(topic .. " partial overflowed message: " .. data )
     end
 )
