@@ -1,10 +1,10 @@
 --Setting up pin 4 for config boot override.
-gpio.mode(4,gpio.INPUT)
+gpio.mode(1,gpio.INPUT)
 --set flag
 is_mqtt_connected=false
 --Microcontroller-specific config & Hardcoded Values
 --PINARRAY is hardcoded due to issues with the configuration fomr
-PINARRAY = {0,1,2,3,5,6,7,8}
+PINARRAY = {0,2,3,4,5,6,7,8}
 MQTTCLIENTID=node.chipid()
 topic_main=node.chipid()
 
@@ -22,9 +22,9 @@ else
 end
 
 function startup()
-    if (ConfigCheck == 0) or (gpio.read(8) == 1) then
+    if (ConfigCheck == 0) or (gpio.read(1) == 1) then
         print("Booting in configuration mode")
-        if gpio.read(4) == 1 then
+        if gpio.read(1) == 1 then
           print("'CONFIG MODE' Reason : Boot override pin triggered")
         end
         if not file.exists("config.ini") then
