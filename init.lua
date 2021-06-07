@@ -4,7 +4,7 @@ gpio.mode(4,gpio.INPUT)
 is_mqtt_connected=false
 --Microcontroller-specific config & Hardcoded Values
 --PINARRAY is hardcoded due to issues with the configuration fomr
-PINARRAY = {0,1,2,3}
+PINARRAY = {0,1,2,3,5,6,7,8}
 MQTTCLIENTID=node.chipid()
 topic_main=node.chipid()
 
@@ -43,7 +43,6 @@ function startup()
             for k, v in string.gmatch(s, "([%w%p]+)%s*=%s*([%p%b%w]+)") do
                 --set fallback (default) list
                 t[BootDelay] = ""
-                t[DHTPIN] = ""
                 t[WIFISSID] = ""
                 t[WIFIPASSWORD] = ""
                 t[MQTTIP] = ""
