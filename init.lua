@@ -41,15 +41,18 @@ function startup()
         if(ConfigCheck == 1) then
             s = file.getcontents('config.ini')
             for k, v in string.gmatch(s, "([%w%p]+)%s*=%s*([%p%b%w]+)") do
-                --set fallback (default) list
-                t[BootDelay] = ""
-                t[WIFISSID] = ""
-                t[WIFIPASSWORD] = ""
-                t[MQTTIP] = ""
-                t[MQTTPORT] = ""
-                t[MQTTUSERNAME] = ""
-                t[MQTTPASSWORD] = ""
+                t[k] = v
             end
+        else
+            --set fallback (default) list
+            t[BootDelay] = ""
+            t[DHTPIN] = ""
+            t[WIFISSID] = ""
+            t[WIFIPASSWORD] = ""
+            t[MQTTIP] = ""
+            t[MQTTPORT] = ""
+            t[MQTTUSERNAME] = ""
+            t[MQTTPASSWORD] = ""
         end
         --WEBCODE
          web="<!DOCTYPE html><html><head><title>Configuration NodeMCU</title></head><body><h3>Bienvenue sur l'interface de configuration du NodeMCU n°"..node.chipid().."</h3><FORM METHOD=\"get\" ACTION=\"/form_send\"><TABLE BORDER=\"1\">"
